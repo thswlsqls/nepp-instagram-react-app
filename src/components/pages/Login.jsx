@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logIn } from '../../apis/user';
 import { instance } from '../../apis';
+import UserContext from '../../contexts/user';
 
 const Login = () => {
+  const { isLogin } = useContext(UserContext);
+  let navigate = useNavigate();
+  const { setIsLogin } = useContext(UserContext);
   const [form, setForm] = useState({ userName: '', password: '' });
+
+  useEffect(() => {
+    if (isLogin) {
+      alert('이미 로그인 하였습니다.');
+      navigate('/');
+    }
+  }, [isLogin]);
 
   // 인풋에 사용자가 값을 변경할 때
   const handleChange = (e) => {
@@ -24,6 +35,8 @@ const Login = () => {
       localStorage.setItem('token', token);
       // header의 Authorization에 토큰 값을 저장함
       instance.defaults.headers.common['Authorization'] = token;
+      setIsLogin(true);
+      navigate('/');
     } else {
       alert('잘못된 로그인 정보 입니다.');
     }

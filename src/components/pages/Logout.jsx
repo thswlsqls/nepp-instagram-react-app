@@ -11,17 +11,15 @@ const Logout = () => {
   // provide한 Context의 UserContext로부터 setIsLogin 함수를 가져옴
   const { setIsLogin } = useContext(UserContext);
 
-  //   로컬스토리지에서 토큰 키값쌍을 제거함
-  localStorage.removeItem('token');
-  //   header의 Authorization을 삭제함
-  delete instance.defaults.headers.common['Authorization'];
-  //   IsLogin값을 false로 변경함
-  setIsLogin(false);
-
-  // 로그인 페이지로 이동함
+  // 로그인 페이지로 이동함 -> LoginCheck
   useEffect(() => {
-    navigate('/login');
-  }, [navigate]);
+    //   로컬스토리지에서 토큰 키값쌍을 제거함
+    localStorage.removeItem('token');
+    //   header의 Authorization을 삭제함
+    delete instance.defaults.headers.common['Authorization'];
+    //   IsLogin값을 false로 변경함
+    setIsLogin(false);
+  }, []);
 
   return <div>logout</div>;
 };
