@@ -11,9 +11,10 @@ export const BasicModal = styled.div`
   width: 80vw;
   max-width: 600px;
   height: 90vh;
-  max-height: 600px;
+  min-height: 600px;
   padding: 15px;
   z-index: 10;
+  overflow: auto;
 `;
 
 export const Backdrop = styled.div`
