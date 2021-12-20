@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { BasicModal, Backdrop } from '../../atoms';
-import { uploadImage } from '../../../apis/upload';
-import { addPost } from '../../../apis/post';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { BasicModal, Backdrop } from "../../atoms";
+import { uploadImage } from "../../../apis/upload";
+import { addPost } from "../../../apis/post";
 
 const AddPost = ({ onClose }) => {
   const [imageList, setImageList] = useState([]);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -21,15 +21,14 @@ const AddPost = ({ onClose }) => {
     };
     reader.readAsDataURL(file);
   };
-  const handleSubmit = async () => {
-    // 1. 이미지들을 업로드해서 s3주소를 받아온다.
-    // 2. textarea글과 이미지주소를 서버에 보내서 post를 생성한다.
-    const promiseList = imageList.map((image) => uploadImage(image.file));
-    // 비동기 작업들이 병렬로 이루어짐, 모두 종료시 결과값을 받아와서 작업이 가능함
-    const urlList = await Promise.all(promiseList);
-    const result = addPost({ content, imageList: urlList });
 
-    console.log(result);
+  const handleSubmit = async () => {
+    // 1. 이미지들을 업로드해서 s3주소를 받아온다
+    // 2. textarea글과 이미지주소를 서버에 보내서 post를 생성한다.
+
+    const promiseList = imageList.map((image) => uploadImage(image.file));
+    const urlList = await Promise.all(promiseList);
+    const result = await addPost({ content, imageList: urlList });
   };
   return (
     <>
@@ -38,8 +37,8 @@ const AddPost = ({ onClose }) => {
           <h2>새 게시물 만들기</h2>
           <BtnSubmit onClick={handleSubmit}>공유하기</BtnSubmit>
         </Header>
-        <Textarea rows='6' onChange={(e) => setContent(e.target.value)} />
-        <Label htmlFor='file'>컴퓨터에서 선택</Label>
+        <Textarea rows="6" onChange={(e) => setContent(e.target.value)} />
+        <Label htmlFor="file">컴퓨터에서 선택</Label>
         <ImageList>
           {imageList.map((image) => (
             <ImageItem>
@@ -48,10 +47,10 @@ const AddPost = ({ onClose }) => {
           ))}
         </ImageList>
         <InputFile
-          id='file'
-          type='file'
-          accept='image/*'
-          onChange={(e) => handleFileChange(e)}
+          id="file"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
         />
       </Modal>
       <Backdrop onClick={onClose} />

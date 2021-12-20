@@ -1,13 +1,16 @@
-import { instance } from './index';
+import { instance } from "./index";
 
-// signUp호출시
 export const signUp = async (data) => {
-  const result = await instance.post('http://localhost:8080/user', data);
+  const result = await instance.post("/user", data);
   return result.data;
 };
 
-// logIn호출시
 export const logIn = async (data) => {
-  const result = await instance.post('http://localhost:8080/user/token', data);
+  const result = await instance.post("/user/token", data);
+  return result.data;
+};
+
+export const getMyInfo = async () => {
+  const result = await instance.get("/user/me");
   return result.data;
 };

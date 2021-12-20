@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from '../../apis/user';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import { signUp } from "../../apis/user";
 
 const Signup = () => {
   let navigate = useNavigate();
-  const [form, setForm] = useState({ userName: '', password: '', name: '' });
+  const [form, setForm] = useState({ userName: "", password: "", name: "" });
   const handleChange = (e) => {
     const { name, value } = e.target;
     const newForm = { ...form, [name]: value };
@@ -16,50 +16,50 @@ const Signup = () => {
     const { userName, password, passwordConfirm } = form;
 
     if (userName.length < 5) {
-      return alert('아이디는 5글자 이상입니다.');
+      return alert("아이디는 5글자 이상입니다.");
     }
     if (password !== passwordConfirm) {
-      return alert('비밀번호를 확인하세요');
+      return alert("비밀번호를 확인하세요");
     }
 
     const { success } = await signUp(form);
     if (success) {
-      alert('가입 성공');
-      navigate('/login');
+      alert("가입 성공");
+      navigate("/login");
     } else {
-      alert('중복되는 아이디가 존재합니다.');
+      alert("중복되는 아이디가 존재합니다.");
     }
   };
   return (
     <Wrapper>
       <Container>
-        <Logo src='https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png' />
+        <Logo src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png" />
         <Message>친구들의 사진과 동영상을 보려면 가입하세요.</Message>
         <Form onSubmit={handleSubmit}>
           <InputText
-            placeholder='사용자 이름'
-            name='userName'
+            placeholder="사용자 이름"
+            name="userName"
             onChange={handleChange}
             required
           />
           <InputText
-            placeholder='성명'
-            name='name'
+            placeholder="성명"
+            name="name"
             onChange={handleChange}
             required
           />
           <InputText
-            placeholder='비밀번호'
-            name='password'
+            placeholder="비밀번호"
+            name="password"
             onChange={handleChange}
-            type='password'
+            type="password"
             required
           />
           <InputText
-            placeholder='비밀번호 확인'
-            name='passwordConfirm'
+            placeholder="비밀번호 확인"
+            name="passwordConfirm"
             onChange={handleChange}
-            type='password'
+            type="password"
             required
           />
           <BtnLogin>가입</BtnLogin>
@@ -67,7 +67,7 @@ const Signup = () => {
       </Container>
       <Container>
         <div>
-          계정이 있으신가요? <Link to='/login'>로그인</Link>
+          계정이 있으신가요? <Link to="/login">로그인</Link>
         </div>
       </Container>
     </Wrapper>

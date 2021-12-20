@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-export const PostList = ({ data }) => {
+const PostList = ({ data }) => {
   return (
     <List>
       {data.map(({ profile_image, user_name, imageList }) => (
         <Container>
           <Header>
-            <PtofileImage src={profile_image} />
+            <ProfileImage src={profile_image} />
             <UserName>{user_name}</UserName>
           </Header>
           <Main>
@@ -20,7 +20,6 @@ export const PostList = ({ data }) => {
     </List>
   );
 };
-
 const List = styled.div``;
 const Container = styled.article`
   background: #fff;
@@ -32,7 +31,7 @@ const Header = styled.header`
   align-items: center;
   padding: 15px;
 `;
-const PtofileImage = styled.img`
+const ProfileImage = styled.img`
   border-radius: 50%;
   width: 32px;
   height: 32px;

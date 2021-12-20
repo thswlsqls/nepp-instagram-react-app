@@ -1,1 +1,1 @@
-export { default as ModalAddPost } from './AddPost';
+export { default as ModalAddPost } from "./AddPost";

@@ -1,15 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import UserContext from '../../contexts/user';
+import { useContext, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/user";
 
-export const LoginCheck = () => {
-  const { isLogin } = useContext(UserContext);
-  //   const { pathname } = useLocation();
-  const navigate = useNavigate();
+const LoginCheck = () => {
+  let { isLogin } = useContext(UserContext);
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (!isLogin) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [isLogin, navigate]);
 
